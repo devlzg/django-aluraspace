@@ -20,6 +20,9 @@ media
 *.py[cod]
 *$py.class
 
+# Ignore a specific folder
+static/admin/
+
 # C extensions
 *.so
 

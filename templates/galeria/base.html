@@ -15,7 +15,7 @@
   </head>
 
   <body>
-    {% include "galeria/partials/_navbar.html" %}
+    {% include "galeria/partials/_navbar.html" %}{% comment %} Quando queremos incluir apenas um bloco específico e não um template completo, utilizamos a tag include. {% endcomment %}
     {% block content %}{% endblock %}
     {% include "galeria/partials/_footer.html" %}
   </body>
