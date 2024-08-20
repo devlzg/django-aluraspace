@@ -9,4 +9,8 @@
 
 # é necessário colocar todos os apps novos no "INSTALLED_APPS" do settings.py
 
-# comando para 
+# tem duas pastas static, uma dentro de setup e uma fora. a de dentro do setup é para o produto em desenvolvimento, a outra é para quando estiver em produção, ou seja, durante o desenvolvimento so adicionamos arquivos à pasta dentro de setup, a de fora é responsabilidade do framework, após o comando collectstatic
+
+# toda vez q alterarmos um model tem que usar o comando python manage.py makemigrations e depois migrate
+# O comando makemigrations cria novas migrações com base nas alterações detectadas nos modelos.
+# O comando migrate sincroniza o estado do banco de dados com o conjunto atual de modelos e migrações.
