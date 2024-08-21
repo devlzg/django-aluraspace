@@ -14,3 +14,5 @@
 # toda vez q alterarmos um model tem que usar o comando python manage.py makemigrations e depois migrate
 # O comando makemigrations cria novas migrações com base nas alterações detectadas nos modelos.
 # O comando migrate sincroniza o estado do banco de dados com o conjunto atual de modelos e migrações.
+
+# É necessário passar a classe ListandoFotografias no momento que registramos o app, como segundo argumento: admin.site.register(Fotografia, ListandoFotografias).

@@ -3,7 +3,7 @@ from galeria.models import Fotografia
 
 # a view serve pra renderizar as páginas HTML, que são chamadas de templates
 def index(request):
-  fotografias = Fotografia.objects.all() # traz todos os itens do banco de dados
+  fotografias = Fotografia.objects.order_by("-data_fotografia").filter(publicada=True) # traz todos os itens do banco de dados
   return render(request, 'galeria/index.html', {"cards": fotografias}) # a requisição vai ser sempre o primeiro parametro, em seguida o arquivo HTML a ser renderizado
 
 def imagem(request, foto_id):
