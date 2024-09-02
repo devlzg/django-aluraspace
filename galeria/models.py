@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 
 # Aqui é onde ficam os "models", que são classes python que serão traduzidas para tabelas
 # em um banco de dados (através do ORM)
@@ -20,6 +21,13 @@ class Fotografia(models.Model):
   foto = models.ImageField(upload_to="fotos/%Y/%m/%d/", blank=True)
   publicada = models.BooleanField(default=False)
   data_fotografia = models.DateTimeField(default=datetime.now, blank=False)
+  usuario = models.ForeignKey(
+      to=User,
+      on_delete=models.SET_NULL, # caso o usuario seja deletado a foto ainda existe, mas com a coluna "usuaio" definida como null
+      null=True,
+      blank=False,
+      related_name="user"
+  )
   
   def __str__(self): 
     return self.nome

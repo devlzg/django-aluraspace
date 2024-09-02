@@ -74,3 +74,23 @@ class CadastroForms(forms.Form):
             }
         )
     )
+    
+    def clean_nome_cadastro(self):
+        nome = self.cleaned_data.get("nome_cadastro")
+        
+        if nome:
+            nome = nome.strip()
+            if " " in nome:
+                raise forms.ValidationError("Não é possível inserir espaços dentro desse campo.")
+            else:
+                return nome
+    
+    def clean_senha_cadastro2(self):
+        senha_cadastro1 = self.cleaned_data.get("senha_cadastro1")
+        senha_cadastro2 = self.cleaned_data.get("senha_cadastro2")
+
+        if senha_cadastro1 and senha_cadastro2:
+            if senha_cadastro1 != senha_cadastro2:
+                raise forms.ValidationError("As senhas não são compatíveis.")
+            else:
+                return senha_cadastro2
