@@ -1,1 +1,1 @@
-Deu certo!!
+Projeto feito durante a formação Python Django da Alura, consiste em um site de galeria de fotos onde cada usuário poderá criar conta e adicionar, editar e excluir fotos, tudo conectado a um banco de dados SQLite para a persistência dos dados.
