@@ -10,6 +10,16 @@ def verifica_usuario(request):
         messages.error(request, 'Usuário não logado.')
         return redirect('login')
 
+def verifica_formulario(form, request, operacao):
+    if form.is_valid():
+            form.save()
+            if operacao == 'nova_imagem':
+                messages.success(request, 'Nova fotografia cadastrada com sucesso!')
+            else:
+                messages.success(request, 'Fotografia editada com sucesso!')
+            return redirect('index')
+    
+
 def index(request):
     verifica_usuario(request)
     fotografias = Fotografia.objects.order_by(
@@ -39,14 +49,20 @@ def nova_imagem(request):
     form = FotografiaForms
     if request.method == 'POST':
         form = FotografiaForms(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Nova fotografia cadastrada com sucesso!')
-            return redirect('index')
+        verifica_formulario(form, request, 'nova_imagem')
     return render(request, 'galeria/nova_imagem.html', {'form': form})
 
-def editar_imagem(request):
-    pass
+def editar_imagem(request, foto_id):
+    fotografia = Fotografia.objects.get(id=foto_id) # pega no banco de dados a fotografia com o ID passado
+    form = FotografiaForms(instance=fotografia) # instance cria um formulario com as informacoes ja preenchidas
+    
+    if request.method == 'POST':
+        form = FotografiaForms(request.POST, request.FILES, instance=fotografia)
+        verifica_formulario(form, request, 'editar_imagem')
+    return render(request, 'galeria/editar_imagem.html', {'form': form, 'foto_id': foto_id})
 
-def deletar_imagem(request):
-    pass
+def deletar_imagem(request, foto_id):
+    fotografia = Fotografia.objects.get(id=foto_id)
+    fotografia.delete()
+    messages.success(request, 'Imagem deletada com sucesso!')
+    return redirect('index')
